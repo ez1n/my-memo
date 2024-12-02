@@ -78,6 +78,19 @@ async def update_memo(memo_id: int, memo: MemoUpdate, db: Session = Depends(get_
     
     return {"id": db_memo.id, "title": db_memo.title, "content": db_memo.content}
 
+# 메모 삭제
+@app.delete("/memo/{memo_id}")
+async def delete_memo(memo_id: int, db: Session = Depends(get_db)):
+    db_memo = db.query(Memo).filter(Memo.id == memo_id).first()
+    
+    if db_memo is None:
+        {"error": "메모가 존재하지 않습니다."}
+    
+    db.delete(db_memo)
+    db.commit()
+    
+    return {"message": "메모가 성공적으로 삭제되었습니다."}
+
 # 기존 라우트
 @app.get("/")
 async def read_root(request: Request):
