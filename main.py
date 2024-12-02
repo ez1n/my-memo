@@ -60,6 +60,24 @@ async def read_memo_list(db: Session = Depends(get_db)):
     memo_list = db.query(Memo).all()
     return memo_list
 
+# 메모 수정
+@app.put("/memo/{memo_id}")
+async def update_memo(memo_id: int, memo: MemoUpdate, db: Session = Depends(get_db)):
+    db_memo = db.query(Memo).filter(Memo.id == memo_id).first()
+    
+    if db_memo is None:
+        return {"error": "메모가 존재하지 않습니다."}
+    
+    if memo.title is not None:
+        db_memo.title = memo.title
+    if memo.content is not None:
+        db_memo.content = memo.content
+        
+    db.commit()
+    db.refresh(db_memo)
+    
+    return {"id": db_memo.id, "title": db_memo.title, "content": db_memo.content}
+
 # 기존 라우트
 @app.get("/")
 async def read_root(request: Request):
