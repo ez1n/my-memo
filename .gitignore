@@ -1,1 +1,3 @@
 __pycache__
+.mysql8-data
+.env
