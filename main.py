@@ -17,7 +17,8 @@ DB_PASSWORD = os.environ.get("DB_PASSWORD")
 app = FastAPI()
 templates = Jinja2Templates(directory='templates')
 
-DATABASE_URL = "mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@localhost:3307/my_memo_app"
+print(DB_USERNAME, DB_PASSWORD)
+DATABASE_URL = f'mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@localhost:3307/my_memo_app'
 engine = create_engine(DATABASE_URL)
 Base = declarative_base()
 
