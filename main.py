@@ -44,6 +44,21 @@ def get_db():
         
 Base.metadata.create_all(bind = engine)
 
+# 메모 생성
+@app.post("/memos")
+async def create_memo(memo: MemoCreate, db: Session = Depends(get_db)):
+    new_memo = Memo(title = memo.title, content = memo.content)
+    db.add(new_memo)
+    db.commit()
+    db.refresh(new_memo)
+    return {"id": new_memo.id, "title": new_memo.title, "content": new_memo.content}
+
+# 메모 조회
+@app.get("/memos")
+async def read_memo_list(db: Session = Depends(get_db)):
+    memo_list = db.query(Memo).all()
+    return memo_list
+
 # 기존 라우트
 @app.get("/")
 async def read_root(request: Request):
