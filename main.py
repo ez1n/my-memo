@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 
+from controllers.memo_contrtoller import router
 from database import Base, engine
-from memo_contrtoller import router
 
 app = FastAPI()
 Base.metadata.create_all(bind=engine)

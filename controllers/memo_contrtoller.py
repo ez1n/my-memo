@@ -3,7 +3,7 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from dependencies import get_db
-from memo_model import Memo, MemoCreate, MemoUpdate
+from models.memo_model import Memo, MemoCreate, MemoUpdate
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
