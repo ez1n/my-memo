@@ -10,7 +10,7 @@ templates = Jinja2Templates(directory="templates")
 
 
 # 메모 생성
-@router.post("/memos")
+@router.post("/memo")
 async def create_memo(memo: MemoCreate, db: Session = Depends(get_db)):
     new_memo = Memo(title=memo.title, content=memo.content)
     db.add(new_memo)
@@ -53,7 +53,7 @@ async def delete_memo(memo_id: int, db: Session = Depends(get_db)):
     db_memo = db.query(Memo).filter(Memo.id == memo_id).first()
 
     if db_memo is None:
-        {"error": "메모가 존재하지 않습니다."}
+        return {"error": "메모가 존재하지 않습니다."}
 
     db.delete(db_memo)
     db.commit()

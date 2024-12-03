@@ -151,7 +151,7 @@
         var title = document.getElementById("new-title").value;
         var content = document.getElementById("new-content").value;
 
-        fetch("/memos/", {
+        fetch("/memo", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
