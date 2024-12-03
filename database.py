@@ -10,7 +10,7 @@ load_dotenv()
 DB_USERNAME = os.environ.get("DB_USERNAME")
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
 
-DATABASE_URL = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@localhost:3307/my_memo_app"
+DATABASE_URL = f"mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@localhost:3309/my_memo_app"
 
 engine = create_engine(DATABASE_URL)
 
